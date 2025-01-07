@@ -6,15 +6,13 @@
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}"> <!-- Ruta absoluta -->
     <title>Document</title>
 </head>
-<body>
-</body>
 <header>
     <div class="menu">
         <nav>
             <ul class="menu-izquierdo">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Calendario</a></li>
-                <li><a href="#">Catálogo</a></li>
+                <li><a href="{{route('inicio.get')}}">Inicio</a></li>
+                <li><a href="{{route('calendario.get') }}">Calendario</a></li>
+                <li><a href="{{route('fijo.catalogo.get')}}">Catálogo</a></li>
             </ul>
 
             <!-- Logo directamente en el menú -->
@@ -25,16 +23,18 @@
                         <li><a href="#">Buscar pedido</a></li>
                         <li class="dropdown">
                             <a href="#" id="usuario-icon">
-                                 <img src="img/usuario.png" alt="Usuario">
+                                 <img src="{{ asset('img/usuario.png') }}" alt="Usuario">
                             </a>
                              <div class="dropdown-menu" id="menu-usuario">
-                                <button>Iniciar sesión</button>
-                                <a href="registrar/" class="btn">Registrarme</a>
+                                <button onclick="window.location.href='{{route('login.get')}}'">Iniciar sesion</button>
+                                <button onclick="window.location.href='{{route('registrar.get')}}'">Registrarme</button>
 
                              </div>
-                </li> 
+                        </li> 
             </ul>
         </nav>
     </div>
 </header>
-</html>
+<body>
+</body>
+

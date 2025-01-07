@@ -1,8 +1,24 @@
 // Capturar el formulario
 let formulario = document.querySelector('#formularioRegistro');
+const botones = document.querySelectorAll('button[type="submit"]');
+
+let valorBoton = ""; // Variable para almacenar el valor del botón presionado
+
+// Captura el botón presionado
+botones.forEach((boton) => {
+    boton.addEventListener("click", () => {
+        valorBoton = boton.value; // Gua rda el valor del botón presionado
+    });
+});
 
 formulario.addEventListener("submit", (e) => {
+    
     e.preventDefault(); // Detenemos el envío del formulario
+    const inputOculto = document.createElement("input");
+    inputOculto.type = "hidden";
+    inputOculto.name = "action";
+    inputOculto.value = valorBoton;
+    formulario.appendChild(inputOculto);
     validateForm(); // Llamamos a la función de validación
 });
 
@@ -21,7 +37,7 @@ function validateForm() {
     const apellidoPReg =  /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'-]{2,}$/;
     const apellidoMReg =  /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ'-]{2,}$/;
     const emailReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/;
-    const telefonoReg = /^\d{2,4}[-.\s]?\d{2,4}[-.\s]?\d{2,4}$/; // Teléfono de 10 dígitos
+    const telefonoReg = /^\d{2,3}[-.\s]?\d{2,3}[-.\s]?\d{4}$/
 
     // Limpiar mensajes de error
     document.getElementById("errorName").textContent = "";
@@ -83,7 +99,7 @@ function validateForm() {
 
     // Si todo es válido, mostrar un mensaje
     if (isValid) {
-        alert("Formulario enviado exitosamente. ¡Gracias!");
+//        alert("Formulario enviado exitosamente. ¡Gracias!");
         formulario.submit(); // Enviamos el formulario si todo es correcto
     }
 }
