@@ -22,7 +22,6 @@ class ControladorCatalogo extends Controller
 {
 
     public function mostrarCatalogo($categoria = null){ //GET: Muestra los productos
-        session()->put('estado_flujo', 'fijo.catalogo.get');
 
         $categorias = Cache::remember('categorias', 30, function () {
             return Categoria::all();
@@ -59,6 +58,11 @@ class ControladorCatalogo extends Controller
     }
 
     public function guardarSeleccionCatalogo(Request $request){ //POST: guarda la selección en session 
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+        session()->put('id_tipopostre', 'fijo');
+        session()->put('proceso_compra', $request->route()->getName());
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+
         $id_postre = $request->input('id_postre');
         $nombre_postre = $request->input('nombre_postre');
         $id_tipopostre = "fijo";
@@ -125,9 +129,10 @@ class ControladorCatalogo extends Controller
     public function seleccionarFecha(Request $request)
     {
 
-        $fechaEscogida = "2025-05-05";
+        $fechaEscogida = "2025-09-05";
         $horaEntrega = "12:00";
-        $postre = session('id_postre');
+        $postre = session('postre');
+        
         $tipopostre = session('id_tipopostre');
 
         session(['fecha_entrega' => $fechaEscogida]);
@@ -155,6 +160,9 @@ class ControladorCatalogo extends Controller
 
         switch($tipopostre){
             case "fijo":
+                /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+                session()->put('proceso_compra', 'fijo.calendario.post');
+                /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
 
                 if($porciones_dia + $cantidad_minima >= 1000){
                     dd($porciones_dia + $cantidad_minima);
@@ -169,6 +177,9 @@ class ControladorCatalogo extends Controller
 
                 return redirect()->route('fijo.detallesPedido.get');
             case "personalizado":
+                /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+                session()->put('proceso_compra', 'personalizado.calendario.post');
+                /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
 
                 if($porciones_dia + $cantidad_minima >= 100){
                     return redirect()->route('personalizado.calendario.get'); //Aqui se le tiene que mandar un mensaje de error
@@ -182,7 +193,11 @@ class ControladorCatalogo extends Controller
 
                 return redirect()->route('personalizado.detallesPedido.get');
                 
-            case "temporada": case "pop-up":
+            case "emergente":
+                /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+                session()->put('proceso_compra', 'emergente.calendario.post');
+                /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+
                 session([
                     'fecha' => $fechaEscogida,
                     'postre' => $postre,
@@ -277,12 +292,18 @@ class ControladorCatalogo extends Controller
 
 
     public function seleccionarDetalles(Request $request){
+        
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+        $tipo_entrega = $request->input('tipo_entrega');
+        session()->put('proceso_compra', $request->route()->getName());
+        session()->put('opcion_envio', $tipo_entrega);
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+
+
         $id_postre = session('postre');
         $postre = Catalogo::where('id_postre', $id_postre)
                             ->first();
         $costo = intval($request->input('costo'));
-        $tipo_entrega = $request->input('tipo_entrega');
-        session()->put('opcion_envio', $tipo_entrega);
         $id_usuario = 1;
         session(['tipo_entrega'=> $tipo_entrega, 'costo'=> $costo]);
 
@@ -302,24 +323,30 @@ class ControladorCatalogo extends Controller
                     ->where('nombre_unidad', $nombreUnidad)
                     ->first(['id_um']);  
 
-        session(['id_um'=> $id_um->id_um]);
+        //session(['id_um'=> $id_um->id_um]);
         $cantidad = intval($request->input('cantidad'));
         session(['porcionespedidas'=> $unidadm * $cantidad]);
-        $valoresSeleccionados = [];
-        foreach (session('atributosSesion', []) as $nombreTipo => $atributos) {
-            $campo = strtolower($nombreTipo);  // Usamos el mismo nombre dinámico que en la vista
-            $valor = $request->input($campo);  // Capturamos el valor enviado
-            $valoresSeleccionados[$campo] = $valor;
-        }
-        $id_tipoatributo = TipoAtributo::where('nombre_atributo', $campo)->first();
-        $id_atributo = AtributosExtra::where('id_tipo_atributo', $id_tipoatributo->idtipo_atributo)
-        ->where('nom_atributo', $valor)
-        ->first(['id_atributo']);
-        session(['id_atributo'=> $id_atributo->id_atributo]);
+        $valoresSeleccionados = session('atributosSesion');
+        session(['id_um' => $id_um->id_um]);
 
-        // Ahora se puede usar los valores capturados
+        if (!empty($valoresSeleccionados)) {
+            foreach (session('atributosSesion', []) as $nombreTipo => $atributos) { //$valoresSeleccionados as $nombreTipo
+                $campo = strtolower($nombreTipo);  // Usamos el mismo nombre dinámico que en la vista
+                $valor = $request->input($campo);  // Capturamos el valor enviado
+                $valoresSeleccionados[$campo] = $valor;
+            }
+
+    
+            $id_tipoatributo = TipoAtributo::where('nombre_atributo', $campo)->first();
+                $id_atributo = AtributosExtra::where('id_tipo_atributo', $id_tipoatributo->idtipo_atributo)
+                ->where('nom_atributo', $valor)
+                ->first(['id_atributo']);
+                session(['id_atributo'=> $id_atributo->id_atributo]);
+        } else {
+            session(['id_atributo' => null]);  
+        }
+
         session(['valoresSeleccionados' => $valoresSeleccionados]); // Captura como array
-        
 
         if ($tipo_entrega == "Domicilio") {
             $datos = [
@@ -341,8 +368,8 @@ class ControladorCatalogo extends Controller
             // Instanciación de postrefijo  
 
             $fijo = new Postrefijo;
-            $fijo->id_atributo= $id_atributo->id_atributo;
-            $fijo->id_um = $id_um->id_um;  //1
+            $fijo->id_atributo= session("id_atributo");//$id_atributo->id_atributo;
+            $fijo->id_um = session("id_um");  //$id_um->id_um
             $fijo->id_postre_elegido = $id_postre;  //1 NUEVO
             $fijo->save();  
 
@@ -388,10 +415,7 @@ class ControladorCatalogo extends Controller
     }
     
     public function mostrarDireccion(){
-        /*$id_usuario = session('id_usuario');
-        $usuario = usuario::where('id_u', $id_usuario)
-                            ->first();
-        return view('direccionFijo', compact('usuario'));*/
+        //ANEXAR LÓGICA PARA OBTENER LA DIRECCIÓN DEL USUARIO
 
         $datos = session('datos_pedido');
         return view('direccionFijo', compact('datos'));
@@ -399,10 +423,14 @@ class ControladorCatalogo extends Controller
 
     public function guardarDireccion(Request $request){ //POST: Mandamos a la ruta del ticket
 
-        $tipo_domicilio = $request->input('tipo_domicilio'); //ACÁ SE DEBERÍA JALAR LA UBICACIÓN DEL FORMULARIO
-        //PERO TOMAMOS LA DEL USUARIO POR AHORA
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+        session()->put('proceso_compra', $request->route()->getName());
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+
+        $tipo_domicilio = $request->input('tipo_domicilio'); 
+        //ACÁ SE DEBERÍA JALAR LA UBICACIÓN DEL FORMULARIO
+        
         $id_usuario = session('id_usuario');
-        //por defecto cargamos la ubicacion del usuario predeterminado
         $user = usuario::where('id_u', $id_usuario)->first();
         $datos = session('datos_pedido'); 
         $codigo_postal = $user->Codigo_postal_u;
@@ -421,7 +449,7 @@ class ControladorCatalogo extends Controller
             $numero = "21";
             //$referencia = $request->input('referencia');
 
-            //si elige volverla su ubicacion predeterminada entonces lo actualizamos en el perfil del usuario
+            //Si elige volverla su ubicacion predeterminada entonces lo actualizamos en el perfil del usuario
             if($request->has('Default')){
                 $user->Codigo_postal_u = $codigo_postal;
                 $user->estado_u = $estado;
@@ -483,6 +511,11 @@ class ControladorCatalogo extends Controller
     }
     
     public function mostrarTicket(){
+
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+        session()->forget('proceso_compra');
+        /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
+
         $pedido = Pedido::find(session("folio"));
         $fechaHoraEntrega = $pedido->fecha_hora_entrega;
 
