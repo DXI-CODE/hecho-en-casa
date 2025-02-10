@@ -194,7 +194,7 @@ class ControladorCatalogoEmergente extends Controller
         /* ENLAZADOR : NO TOCAR O JOAN TE MANDA A LA LUNA */
         $rutaPost = "emergente.direccion.post";
         //$datos = session('datos_pedido');
-        return view('confirmaDato', compact('rutaPost'));
+        return view('ConfirmaDato', compact('rutaPost'));
     }
 
     public function seleccionarDireccion(Request $request){ 
