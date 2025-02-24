@@ -50,4 +50,5 @@ Para más información sobre nuestros proyectos o colaboraciones, no dudes en po
 - Linkedin: https://www.linkedin.com/company/dxicode/
 ---
 
-> _“Soluciones al día”_  
+> _“Soluciones al día”_
+> > _“asiá yaga riña”_
