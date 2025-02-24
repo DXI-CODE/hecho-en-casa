@@ -20,23 +20,23 @@ DxiCode es una empresa desarrollada como parte de un proyecto de la materia **In
 ### **Créditos**  
 
 #### **Equipo de Desarrollo Front-End**  
-- **Jeremy Osorio Ramos** (Encargado)  
+- **Jeremy Osorio Ramos**
 - Karla Guadalupe Cordero Luna  
 - Mariana Palacios Trinidad  
 - Angel Daniel Jimenez Pacheco
 - Isacar Jiménez Charis
 
 #### **Equipo de Desarrollo Back-End**  
-- **Joan Pablo Alvarado Garfias** (Encargado)  
+- **Joan Pablo Alvarado Garfias** 
 - Jeycson Gabriel López Hernández  
 - Juan Emmanuel Becerril Nolasco  
 - Jeovani Pacheco Rueda    
 
 #### **Equipo de Testing**  
-- **Gerson Antonio Regalado López** (Encargado)  
+- **Gerson Antonio Regalado López**
 
 #### **Equipo de Base de Datos**  
-- **Jeycson Gabriel López Hernández** (Encargado)  
+- **Jeycson Gabriel López Hernández** 
 - Jeovani Pacheco Rueda  
 - Joan Pablo Alvarado Garfias  
 - Juan Emmanuel Becerril Nolasco  
