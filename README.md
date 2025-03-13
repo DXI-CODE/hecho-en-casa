@@ -2,53 +2,36 @@
 
 ![Logotipo de DxiCode](https://i.ibb.co/FhcdjyJ/Logo-dxicode-transformed.png "DxiCode")
 
-### **Misión**  
-Nuestra misión es crear soluciones de software de alta calidad que superen las expectativas de nuestros clientes, impulsando su crecimiento y éxito. Nos enfocamos en la innovación y en el uso de tecnologías de vanguardia para ofrecer un servicio excepcional, asegurando una mejora continua y el máximo valor en cada proyecto.
-
----
-
-### **Visión**  
-Convertirnos en una empresa líder en ingeniería de software, reconocida por ofrecer soluciones tecnológicas innovadoras que transformen las operaciones y el crecimiento de nuestros clientes. Aspiramos a un futuro donde la tecnología sea accesible y útil para todos, promoviendo la innovación y el progreso en cada proyecto.
-
----
-
 ### **Acerca de DxiCode**  
-DxiCode es una empresa desarrollada como parte de un proyecto de la materia **Ingeniería de Software I** de la **Universidad del Istmo**. Nuestro equipo está comprometido en ofrecer soluciones de software efectivas y de calidad, trabajando en colaboración para cumplir con los objetivos de cada cliente.
+DxiCode es una iniciativa estudiantil adscrita a la carrera de Ingeniería en Computación de la Universidad del Istmo.
+Somos un grupo de alumnos apasionados por la tecnología, enfocados en ofrecer soluciones informáticas innovadoras y personalizadas a clientes personales y pequeños proyectos.
+
+Nuestro enfoque no solo está en crear soluciones técnicas, sino también en brindar asesoría, capacitación y soporte continuo para asegurar que nuestros clientes obtengan el máximo beneficio de nuestros servicios. En DxiCode, combinamos el conocimiento académico con la práctica real, permitiéndonos crecer como profesionales mientras ayudamos a otros a alcanzar sus objetivos tecnológicos.
 
 ---
 
 ### **Créditos**  
 
-#### **Equipo de Desarrollo Front-End**  
-- **Jeremy Osorio Ramos**
-- Karla Guadalupe Cordero Luna  
-- Mariana Palacios Trinidad  
+#### **Equipo de Desarrollo**  
 - Angel Daniel Jimenez Pacheco
+- Gerson Antonio Regalado López
 - Isacar Jiménez Charis
-
-#### **Equipo de Desarrollo Back-End**  
-- **Joan Pablo Alvarado Garfias** 
-- Jeycson Gabriel López Hernández  
-- Juan Emmanuel Becerril Nolasco  
-- Jeovani Pacheco Rueda    
-
-#### **Equipo de Testing**  
-- **Gerson Antonio Regalado López**
-
-#### **Equipo de Base de Datos**  
-- **Jeycson Gabriel López Hernández** 
-- Jeovani Pacheco Rueda  
-- Joan Pablo Alvarado Garfias  
-- Juan Emmanuel Becerril Nolasco  
+- Jeovani Pacheco Rueda
+- Jeremy Osorio Ramos
+- Jeycson Gabriel López Hernández
+- Joan Pablo Alvarado Garfias
+- Juan Emmanuel Becerril Nolasco
+- Karla Guadalupe Cordero Luna
+- Mariana Palacios Trinidad
 
 ---
 
 ### **Contacto**  
 Para más información sobre nuestros proyectos o colaboraciones, no dudes en ponerte en contacto con nosotros a través de nuestro repositorio o los canales designados de comunicación.
 
-- Correo: dxicode@gmail.com
-- Linkedin: https://www.linkedin.com/company/dxicode/
+- Correo: [dxicode](mailto:dxicode@gmail.com)
+- Linkedin: [company/dxicode](https://www.linkedin.com/company/dxicode/)
 ---
 
 > _“Soluciones al día”_
-> > _“asiá yaga riña”_
+> _“asiá yaga riña”_
